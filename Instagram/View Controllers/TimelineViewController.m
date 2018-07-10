@@ -12,6 +12,7 @@
 #import "InstagramCell.h"
 #import "Post.h"
 #import "ComposeViewController.h"
+#import "DetailsViewController.h"
 #import "Parse.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *posts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIImage *finalImage;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -30,8 +32,10 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self refresh];
-    
 }
 
 - (void)refresh {
@@ -45,10 +49,12 @@
         if (posts) {
             self.posts = [NSMutableArray arrayWithArray:posts];
             [self.tableView reloadData];
+            
         }
         else {
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -59,10 +65,6 @@
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     UIImage *resizedImage = [self resizeImage:editedImage withSize:CGSizeMake(100, 100)];
     self.finalImage = resizedImage;
-    
-    //[Post postUserImage:resizedImage withCaption:@"hello" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        
-    //}];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     [self performSegueWithIdentifier:@"composeSegue" sender:nil];
@@ -120,7 +122,13 @@
     if ([segue.identifier isEqualToString:@"composeSegue"]) {
         UINavigationController *navigationController = segue.destinationViewController;
         ComposeViewController *composeViewController =  (ComposeViewController *) navigationController.topViewController;
-        composeViewController.photoImageView.image = self.finalImage;
+        composeViewController.photo = self.finalImage;
+    }
+    else if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+        DetailsViewController *detailsViewController =  segue.destinationViewController;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Post *post = self.posts[indexPath.row];
+        detailsViewController.post = post;
     }
 }
 

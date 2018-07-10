@@ -12,6 +12,7 @@
 		F68A708B20F4261A00F50C88 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A708A20F4261A00F50C88 /* Post.m */; };
 		F68A708E20F426D000F50C88 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A708D20F426D000F50C88 /* ComposeViewController.m */; };
 		F68A709720F42E3100F50C88 /* InstagramCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A709620F42E3100F50C88 /* InstagramCell.m */; };
+		F68A709A20F5508000F50C88 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A709920F5508000F50C88 /* DetailsViewController.m */; };
 		F6F040A720F416DD0084C2E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F040A620F416DD0084C2E2 /* AppDelegate.m */; };
 		F6F040AA20F416DD0084C2E2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F040A920F416DD0084C2E2 /* ViewController.m */; };
 		F6F040AD20F416DD0084C2E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F040AB20F416DD0084C2E2 /* Main.storyboard */; };
@@ -35,6 +36,8 @@
 		F68A708D20F426D000F50C88 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		F68A709520F42E3100F50C88 /* InstagramCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstagramCell.h; sourceTree = "<group>"; };
 		F68A709620F42E3100F50C88 /* InstagramCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstagramCell.m; sourceTree = "<group>"; };
+		F68A709820F5508000F50C88 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		F68A709920F5508000F50C88 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		F6F040A220F416DD0084C2E2 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F040A520F416DD0084C2E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F6F040A620F416DD0084C2E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,6 +79,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F68A709B20F5511200F50C88 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F6F040A820F416DD0084C2E2 /* ViewController.h */,
+				F6F040A920F416DD0084C2E2 /* ViewController.m */,
+				F68A708320F41CCF00F50C88 /* LoginViewController.h */,
+				F68A708420F41CCF00F50C88 /* LoginViewController.m */,
+				F68A709820F5508000F50C88 /* DetailsViewController.h */,
+				F68A709920F5508000F50C88 /* DetailsViewController.m */,
+				F68A708C20F426D000F50C88 /* ComposeViewController.h */,
+				F68A708D20F426D000F50C88 /* ComposeViewController.m */,
+				F68A708620F41F0000F50C88 /* TimelineViewController.h */,
+				F68A708720F41F0000F50C88 /* TimelineViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		F6F0409920F416DD0084C2E2 = {
 			isa = PBXGroup;
 			children = (
@@ -97,19 +117,12 @@
 		F6F040A420F416DD0084C2E2 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				F68A709B20F5511200F50C88 /* View Controllers */,
 				F6F040A520F416DD0084C2E2 /* AppDelegate.h */,
 				F68A709520F42E3100F50C88 /* InstagramCell.h */,
 				F68A709620F42E3100F50C88 /* InstagramCell.m */,
 				F6F040A620F416DD0084C2E2 /* AppDelegate.m */,
-				F6F040A820F416DD0084C2E2 /* ViewController.h */,
-				F6F040A920F416DD0084C2E2 /* ViewController.m */,
-				F68A708320F41CCF00F50C88 /* LoginViewController.h */,
-				F68A708420F41CCF00F50C88 /* LoginViewController.m */,
 				F6F040AB20F416DD0084C2E2 /* Main.storyboard */,
-				F68A708C20F426D000F50C88 /* ComposeViewController.h */,
-				F68A708D20F426D000F50C88 /* ComposeViewController.m */,
-				F68A708620F41F0000F50C88 /* TimelineViewController.h */,
-				F68A708720F41F0000F50C88 /* TimelineViewController.m */,
 				F68A708920F4261A00F50C88 /* Post.h */,
 				F68A708A20F4261A00F50C88 /* Post.m */,
 				F6F040AE20F416DF0084C2E2 /* Assets.xcassets */,
@@ -213,6 +226,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Instagram/Pods-Instagram-resources.sh",
+				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
@@ -220,6 +234,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
@@ -243,6 +258,7 @@
 				F6F040AA20F416DD0084C2E2 /* ViewController.m in Sources */,
 				F6F040B520F416DF0084C2E2 /* main.m in Sources */,
 				F68A708E20F426D000F50C88 /* ComposeViewController.m in Sources */,
+				F68A709A20F5508000F50C88 /* DetailsViewController.m in Sources */,
 				F6F040A720F416DD0084C2E2 /* AppDelegate.m in Sources */,
 				F68A708820F41F0000F50C88 /* TimelineViewController.m in Sources */,
 			);

@@ -11,7 +11,7 @@
 @interface ComposeViewController : UIViewController 
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
-@property (weak, nonatomic) IBOutlet UILabel *composeLabel;
-
+@property (weak, nonatomic) IBOutlet UITextField *composeLabel;
+@property (strong, nonatomic) UIImage *photo;
 
 @end

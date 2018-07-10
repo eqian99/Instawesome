@@ -7,8 +7,12 @@
 //
 
 #import "ComposeViewController.h"
+#import "Post.h"
+#import "Mapkit/Mapkit.h"
 
 @interface ComposeViewController ()
+@property (weak, nonatomic) IBOutlet UISwitch *locationSwitch;
+@property (weak, nonatomic) IBOutlet MKMapView *locationMap;
 
 @end
 
@@ -16,7 +20,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.photoImageView.image = self.photo;
 
+}
+- (IBAction)switchAction:(id)sender {
+    if (self.locationSwitch.isOn) {
+        [self.locationMap setHidden:NO];
+    }
+    else {
+        [self.locationMap setHidden:YES];
+    }
+        
+}
+
+- (IBAction)shareAction:(id)sender {
+    [Post postUserImage:self.photoImageView.image withCaption:self.composeLabel.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    }];
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+
+- (IBAction)exitAction:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
