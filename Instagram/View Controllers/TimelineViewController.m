@@ -63,7 +63,7 @@
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    UIImage *resizedImage = [self resizeImage:editedImage withSize:CGSizeMake(100, 100)];
+    UIImage *resizedImage = [self resizeImage:editedImage withSize:CGSizeMake(500, 500)];
     self.finalImage = resizedImage;
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -99,8 +99,7 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-    
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
+    //imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -109,6 +108,7 @@
         NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
     
 }
 

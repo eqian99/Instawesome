@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 #import "Parse/Parse.h"
 @interface Post : PFObject<PFSubclassing>
 
@@ -14,12 +15,16 @@
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) NSDate *createdAt;
+@property (nonatomic, strong) NSString *username;
 
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) PFFile *image;
 @property (nonatomic, strong) NSNumber *likeCount;
 @property (nonatomic, strong) NSNumber *commentCount;
 
-+ (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+@property (nonatomic, assign) double latitude;
+@property (nonatomic, assign) double longitude;
+
++ (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLatitude: (double)latitude withLongitude: (double)longitude withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end

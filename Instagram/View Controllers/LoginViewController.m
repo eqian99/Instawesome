@@ -8,11 +8,13 @@
 
 #import "LoginViewController.h"
 #import "TimelineViewController.h"
+#import <CoreImage/CoreImage.h>
 #import "Parse.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIImageView *fontImage;
 
 @end
 
@@ -20,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.fontImage.image = [self inverseColor:self.fontImage.image];
 }
 - (IBAction)signupAction:(id)sender {
     // initialize a user object
@@ -40,6 +42,15 @@
         }
     }];
 }
+
+- (UIImage *)inverseColor:(UIImage *)image {
+    CIImage *coreImage = [CIImage imageWithCGImage:image.CGImage];
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorInvert"];
+    [filter setValue:coreImage forKey:kCIInputImageKey];
+    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+    return [UIImage imageWithCIImage:result];
+}
+
 - (IBAction)loginAction:(id)sender {
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
@@ -59,10 +70,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
-        TimelineViewController *timelineViewController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
     }
-}
+} */
 
 @end
