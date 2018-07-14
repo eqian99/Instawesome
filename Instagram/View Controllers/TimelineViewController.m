@@ -13,14 +13,20 @@
 #import "Post.h"
 #import "ComposeViewController.h"
 #import "DetailsViewController.h"
+#import "ProfileViewController.h"
+#import "InfiniteActivityScrollingView.h"
 #import "Parse.h"
 
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, InstagramCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *posts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIImage *finalImage;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
+@property InfiniteActivityScrollingView* loadingMoreView;
+@property (nonatomic, assign) NSInteger postCount;
+
 
 @end
 
@@ -35,27 +41,87 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    
+    self.postCount = 0;
+    
     [self refresh];
 }
 
+//perform batch updates
 - (void)refresh {
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    postQuery.limit = 20;
+    self.postCount += 1;
+    postQuery.limit = self.postCount;
     
     // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.posts = [NSMutableArray arrayWithArray:posts];
+            self.isMoreDataLoading = false;
+            [self.loadingMoreView stopAnimating];
             [self.tableView reloadData];
-            
+            [self.refreshControl endRefreshing];
         }
         else {
             NSLog(@"%@", error.localizedDescription);
         }
-        [self.refreshControl endRefreshing];
+
     }];
+}
+
+- (void)refreshInfiniteScrolling {
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    self.postCount += 1;
+    postQuery.limit = self.postCount;
+    
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            self.posts = [NSMutableArray arrayWithArray:posts];
+            self.isMoreDataLoading = false;
+            [self.loadingMoreView stopAnimating];
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        
+    }];
+}
+
+-(void)loadMoreData{
+    [self refresh];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = true;
+            
+            // Update position of loadingMoreView, and start loading indicator
+            CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteActivityScrollingView.defaultHeight);
+            self.loadingMoreView.frame = frame;
+            [self.loadingMoreView startAnimating];
+            
+            // Code to load more results
+            [self loadMoreData];
+            NSLog(@"%d", self.postCount);
+        }
+    }
+}
+
+- (void)instagramCell:(InstagramCell *)instagramCell didTap:(PFUser *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -130,11 +196,16 @@
         Post *post = self.posts[indexPath.row];
         detailsViewController.post = post;
     }
+    else if ([segue.identifier isEqualToString:@"profileSegue"]) {
+        ProfileViewController *profileViewController = segue.destinationViewController;
+        profileViewController.user = sender;
+    }
 }
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     InstagramCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InstagramCell" forIndexPath:indexPath];
+    cell.delegate = self;
     [cell setPost: self.posts[indexPath.row]];
     return cell;
 }

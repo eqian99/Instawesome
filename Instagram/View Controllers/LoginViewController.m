@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "TimelineViewController.h"
 #import <CoreImage/CoreImage.h>
+#import <ParseUI.h>
 #import "Parse.h"
 
 @interface LoginViewController ()
@@ -31,6 +32,9 @@
     // set user properties
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
+    PFFile *image = [self getPFFileFromImage:[UIImage imageNamed:@"profile.png"]];
+    [newUser setValue:image forKey:@"profileImage"];
+    [newUser saveInBackground];
     
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
@@ -41,6 +45,22 @@
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
     }];
+}
+
+- (PFFile *)getPFFileFromImage: (UIImage * _Nullable)image {
+    
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    return [PFFile fileWithName:@"image.png" data:imageData];
 }
 
 - (UIImage *)inverseColor:(UIImage *)image {

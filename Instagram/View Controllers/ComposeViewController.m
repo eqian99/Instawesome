@@ -9,6 +9,7 @@
 #import "ComposeViewController.h"
 #import "Post.h"
 #import <CoreLocation/CoreLocation.h>
+#import "MBProgressHUD.h"
 
 @interface ComposeViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *locationSwitch;
@@ -65,9 +66,11 @@
 }
 
 - (IBAction)shareAction:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Post postUserImage:self.photoImageView.image withCaption:self.composeLabel.text withLatitude: self.coord.latitude withLongitude: self.coord.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self dismissViewControllerAnimated:true completion:nil];
     }];
-    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (IBAction)exitAction:(id)sender {

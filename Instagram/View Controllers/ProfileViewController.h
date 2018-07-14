@@ -10,5 +10,5 @@
 #import <Parse.h>
 
 @interface ProfileViewController : UIViewController
-
+@property (assign, nonatomic) PFUser *user;
 @end

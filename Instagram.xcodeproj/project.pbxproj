@@ -16,6 +16,8 @@
 		F6B6E16020F5637E00B86D04 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6E15F20F5637E00B86D04 /* CoreLocation.framework */; };
 		F6B6E16820F69AF400B86D04 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B6E16720F69AF400B86D04 /* ProfileViewController.m */; };
 		F6B6E16B20F6BD3500B86D04 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B6E16A20F6BD3500B86D04 /* ImageCell.m */; };
+		F6B6E16E20F80D2000B86D04 /* YelpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B6E16D20F80D2000B86D04 /* YelpManager.m */; };
+		F6B6E17120F9151500B86D04 /* InfiniteActivityScrollingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B6E17020F9151500B86D04 /* InfiniteActivityScrollingView.m */; };
 		F6F040A720F416DD0084C2E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F040A620F416DD0084C2E2 /* AppDelegate.m */; };
 		F6F040AA20F416DD0084C2E2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F040A920F416DD0084C2E2 /* ViewController.m */; };
 		F6F040AD20F416DD0084C2E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F040AB20F416DD0084C2E2 /* Main.storyboard */; };
@@ -46,6 +48,10 @@
 		F6B6E16720F69AF400B86D04 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		F6B6E16920F6BD3500B86D04 /* ImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		F6B6E16A20F6BD3500B86D04 /* ImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
+		F6B6E16C20F80D2000B86D04 /* YelpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YelpManager.h; sourceTree = "<group>"; };
+		F6B6E16D20F80D2000B86D04 /* YelpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YelpManager.m; sourceTree = "<group>"; };
+		F6B6E16F20F9151500B86D04 /* InfiniteActivityScrollingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteActivityScrollingView.h; sourceTree = "<group>"; };
+		F6B6E17020F9151500B86D04 /* InfiniteActivityScrollingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteActivityScrollingView.m; sourceTree = "<group>"; };
 		F6F040A220F416DD0084C2E2 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F040A520F416DD0084C2E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F6F040A620F416DD0084C2E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -133,6 +139,8 @@
 				F6F040A520F416DD0084C2E2 /* AppDelegate.h */,
 				F68A709520F42E3100F50C88 /* InstagramCell.h */,
 				F68A709620F42E3100F50C88 /* InstagramCell.m */,
+				F6B6E16F20F9151500B86D04 /* InfiniteActivityScrollingView.h */,
+				F6B6E17020F9151500B86D04 /* InfiniteActivityScrollingView.m */,
 				F6F040A620F416DD0084C2E2 /* AppDelegate.m */,
 				F6B6E16920F6BD3500B86D04 /* ImageCell.h */,
 				F6B6E16A20F6BD3500B86D04 /* ImageCell.m */,
@@ -141,6 +149,8 @@
 				F68A708A20F4261A00F50C88 /* Post.m */,
 				F6F040AE20F416DF0084C2E2 /* Assets.xcassets */,
 				F6F040B020F416DF0084C2E2 /* LaunchScreen.storyboard */,
+				F6B6E16C20F80D2000B86D04 /* YelpManager.h */,
+				F6B6E16D20F80D2000B86D04 /* YelpManager.m */,
 				F6F040B320F416DF0084C2E2 /* Info.plist */,
 				F6F040B420F416DF0084C2E2 /* main.m */,
 			);
@@ -271,12 +281,14 @@
 				F6B6E16B20F6BD3500B86D04 /* ImageCell.m in Sources */,
 				F68A708B20F4261A00F50C88 /* Post.m in Sources */,
 				F6F040AA20F416DD0084C2E2 /* ViewController.m in Sources */,
+				F6B6E16E20F80D2000B86D04 /* YelpManager.m in Sources */,
 				F6B6E16820F69AF400B86D04 /* ProfileViewController.m in Sources */,
 				F6F040B520F416DF0084C2E2 /* main.m in Sources */,
 				F68A708E20F426D000F50C88 /* ComposeViewController.m in Sources */,
 				F68A709A20F5508000F50C88 /* DetailsViewController.m in Sources */,
 				F6F040A720F416DD0084C2E2 /* AppDelegate.m in Sources */,
 				F68A708820F41F0000F50C88 /* TimelineViewController.m in Sources */,
+				F6B6E17120F9151500B86D04 /* InfiniteActivityScrollingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
