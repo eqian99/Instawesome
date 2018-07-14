@@ -52,7 +52,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    self.postCount += 1;
+    self.postCount += 20;
     postQuery.limit = self.postCount;
     
     // fetch data asynchronously
